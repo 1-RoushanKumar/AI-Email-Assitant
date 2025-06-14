@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Email-Assitant.iml" filepath="$PROJECT_DIR$/Email-Assitant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/email-assistant-frontend/email-assistant-frontend.iml" filepath="$PROJECT_DIR$/email-assistant-frontend/email-assistant-frontend.iml" />
     </modules>
   </component>
 </project>
