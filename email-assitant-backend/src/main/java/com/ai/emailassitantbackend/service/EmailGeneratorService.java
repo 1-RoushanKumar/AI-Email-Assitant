@@ -29,4 +29,16 @@ public class EmailGeneratorService {
     public String generateEmailReply(EmailRequest emailRequest) {
         return null;
     }
+
+    private String buildPrompt(EmailRequest emailRequest) {
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("Generate an email reply based on the following content. Do not include a subject line in the response.");
+
+        if (emailRequest.getTone() != null && !emailRequest.getTone().isEmpty()) {
+            prompt.append("Use a ").append(emailRequest.getTone()).append(" tone.");
+        }
+        prompt.append("\nOriginal Email: \n");
+        prompt.append(emailRequest.getEmailContent());
+        return prompt.toString();
+    }
 }
