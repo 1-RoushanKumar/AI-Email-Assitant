@@ -1,145 +1,89 @@
-import './App.css'
-import {
-    Container,
-    TextField,
-    Typography,
-    Box,
-    FormControl,
-    Select,
-    InputLabel,
-    MenuItem,
-    Divider,
-    Button, CircularProgress
-} from '@mui/material'
-
-import axios from "axios";
 import {useState} from "react";
+import axios from "axios";
+import './App.css'
 
 function App() {
-
-    const [emailContent, setEmailContent] = useState('')
-    const [tone, setTone] = useState('')
-    const [generatedReply, setGeneratedReply] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
+    const [emailContent, setEmailContent] = useState("");
+    const [tone, setTone] = useState("");
+    const [generatedReply, setGeneratedReply] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async () => {
-        setLoading(true)
-        setError('')
+        setLoading(true);
+        setError("");
         try {
-            const response = await axios.post('http://localhost:8080/api/email/generate', {
+            const response = await axios.post("http://localhost:8080/api/email/generate", {
                 emailContent,
                 tone,
-            })
+            });
 
-            setGeneratedReply(typeof response.data === 'string' ? response.data : JSON.stringify(response.data))
+            setGeneratedReply(
+                typeof response.data === "string" ? response.data : JSON.stringify(response.data)
+            );
         } catch (error) {
-            setError('Failed to generate Email reply. Please try again later.')
-            console.error(error)
+            setError("Failed to generate Email reply. Please try again later.");
+            console.error(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
-
-    const sharedFieldStyles = {
-        backgroundColor: 'rgba(60, 211, 173, 0.15)',
-        borderRadius: 2,
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-        '& .MuiOutlinedInput-root': {
-            transition: 'all 0.25s ease-in-out',
-            '& fieldset': {
-                borderColor: 'rgba(255,255,255,0.3)',
-            },
-            '&:hover fieldset': {
-                borderColor: '#4cb8c4',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#3cd3ad',
-            },
-        },
-    }
+    };
 
     return (
-        <Container>
-            <Box className="glass-card">
-                <Typography variant="h3" align="center" gutterBottom sx={{
-                    color: '#fff', fontWeight: 700
-                }}>
-                    Email Reply Assistant 🤖
-                </Typography>
+        <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white p-4">
+            <div
+                className="bg-slate-800/60 backdrop-blur-md border border-slate-700 rounded-2xl shadow-2xl p-8 w-full max-w-3xl">
+                <h1 className="text-3xl font-bold text-center mb-6">Email Reply Assistant 🤖</h1>
 
-                <Divider sx={{mb: 3, borderColor: 'rgba(255,255,255,0.3)'}}/>
-
-                <TextField
-                    fullWidth
-                    multiline
+                <textarea
                     rows={6}
-                    variant="outlined"
-                    label="Original Email Content"
                     value={emailContent}
                     onChange={(e) => setEmailContent(e.target.value)}
-                    sx={{mb: 3, ...sharedFieldStyles}}
+                    placeholder="Paste your email here..."
+                    className="w-full p-4 mb-4 rounded-lg bg-slate-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-400"
                 />
 
-                <FormControl fullWidth sx={{mb: 3, ...sharedFieldStyles}}>
-                    <InputLabel sx={{color: 'white'}}>Tone (Optional)</InputLabel>
-                    <Select
-                        value={tone}
-                        label="Tone (Optional)"
-                        sx={{color: 'white'}}
-                        inputProps={{style: {color: 'white'}}}
-                        onChange={(e) => setTone(e.target.value)}
-                    >
-                        <MenuItem value="">None</MenuItem>
-                        <MenuItem value="Professional">Professional</MenuItem>
-                        <MenuItem value="Casual">Casual</MenuItem>
-                        <MenuItem value="Friendly">Friendly</MenuItem>
-                    </Select>
-                </FormControl>
+                <select
+                    value={tone}
+                    onChange={(e) => setTone(e.target.value)}
+                    className="w-full p-3 mb-4 rounded-lg bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                >
+                    <option value="">Select Tone (Optional)</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Friendly">Friendly</option>
+                </select>
 
-                <Button
-                    variant="contained"
-                    color="primary"
+                <button
                     onClick={handleSubmit}
                     disabled={!emailContent || loading}
-                    fullWidth
-                    sx={{py: 1.5, fontWeight: 600}}
+                    className="w-full bg-teal-500 hover:bg-teal-600 transition font-semibold py-3 rounded-lg disabled:opacity-50"
                 >
-                    {loading ? <CircularProgress size={24} color="inherit"/> : 'Generate Reply'}
-                </Button>
+                    {loading ? "Generating..." : "Generate Reply"}
+                </button>
 
-                {error && (
-                    <Typography color="error" sx={{mt: 2}}>
-                        {error}
-                    </Typography>
-                )}
+                {error && <p className="text-red-400 mt-3">{error}</p>}
 
                 {generatedReply && (
-                    <Box sx={{mt: 4}}>
-                        <Typography variant="h5" color="lightgreen" gutterBottom>
-                            Generated Reply
-                        </Typography>
-                        <TextField
-                            fullWidth
-                            multiline
+                    <div className="mt-6">
+                        <h2 className="text-lg font-semibold text-green-400 mb-2">Generated Reply</h2>
+                        <textarea
                             rows={8}
-                            variant="outlined"
+                            readOnly
                             value={generatedReply}
-                            inputProps={{readOnly: true}}
-                            sx={sharedFieldStyles}
+                            className="w-full p-4 rounded-lg bg-slate-700 text-white placeholder-gray-400 focus:outline-none"
                         />
-                        <Button
-                            variant="outlined"
-                            sx={{mt: 2, fontWeight: 600, color: 'white', borderColor: 'white'}}
+                        <button
                             onClick={() => navigator.clipboard.writeText(generatedReply)}
+                            className="mt-3 border border-white hover:bg-white hover:text-slate-900 transition px-4 py-2 rounded-lg"
                         >
                             📋 Copy to Clipboard
-                        </Button>
-                    </Box>
+                        </button>
+                    </div>
                 )}
-            </Box>
-        </Container>
-    )
+            </div>
+        </div>
+    );
 }
 
-export default App
+export default App;
