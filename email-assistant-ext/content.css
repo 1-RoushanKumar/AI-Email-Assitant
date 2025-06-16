@@ -1,0 +1,143 @@
+/* Wrapper for the entire AI button + dropdown toggle */
+.ai-reply-wrapper {
+    display: inline-flex;
+    border-radius: 999px; /* Pill shape */
+    overflow: hidden;
+    border: 1px solid #1a73e8; /* Gmail-like blue border */
+    margin-right: 8px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    font-family: Roboto, sans-serif; /* Use Gmail's font */
+}
+
+/* Main "Reply with AI" button part */
+.ai-main-button {
+    padding: 8px 16px;
+    background-color: #1a73e8;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    user-select: none; /* Prevent text selection */
+    transition: background-color 0.2s ease; /* Smooth hover */
+}
+
+.ai-main-button:hover {
+    background-color: #1565c0;
+}
+
+/* Dropdown toggle button (arrow) */
+.ai-dropdown-toggle-button {
+    padding: 0 12px;
+    background-color: #1a73e8;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    border-left: 1px solid rgba(255,255,255,0.3);
+    transition: background-color 0.2s ease; /* Smooth hover */
+}
+
+.ai-dropdown-toggle-button:hover {
+    background-color: #1565c0;
+}
+
+/* Dropdown menu container */
+.ai-tone-dropdown {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    display: none; /* Hidden by default */
+    z-index: 9999; /* Ensure it's on top */
+    min-width: 180px; /* Made smaller */
+    padding: 4px 0; /* Reduced overall padding */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+
+    max-height: 80vh; /* Limit height to 80% of the viewport height */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+}
+
+/* Dropdown option items */
+.ai-dropdown-option {
+    padding: 6px 10px; /* Reduced padding */
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: #fff; /* Default */
+    transition: background-color 0.1s ease;
+    font-size: 13px; /* Slightly smaller font */
+}
+
+.ai-dropdown-option:hover {
+    background-color: #f1f1f1;
+}
+
+.ai-dropdown-option.selected {
+    background-color: #e6e6e6; /* Highlight selected */
+}
+
+/* Labels within dropdown */
+.ai-dropdown-label {
+    font-weight: bold;
+    margin-bottom: 3px; /* Reduced margin */
+    padding: 5px 10px; /* Match option padding */
+    color: #333;
+    font-size: 13px; /* Slightly smaller font */
+}
+
+/* Horizontal rule/separator */
+.ai-dropdown-separator {
+    margin: 6px 0; /* Reduced margin */
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Keywords Input */
+.ai-keywords-input {
+    width: calc(100% - 20px); /* Adjust for padding within dropdownContent */
+    padding: 6px 10px; /* Reduced padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px; /* Reduced margin */
+    box-sizing: border-box; /* Include padding in width calculation */
+    font-size: 13px; /* Slightly smaller font */
+}
+
+/* Error Message Div */
+.ai-error-message {
+    color: #c00; /* Darker red text */
+    background-color: #ffe0e0; /* Light red background */
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ff0000;
+    font-weight: bold;
+    display: none; /* <--- THIS MUST BE NONE */
+    position: absolute; /* For positioning */
+    z-index: 9999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Apply Button specific styles */
+.ai-apply-button-container {
+    padding: 8px 10px; /* Padding around the button */
+    text-align: right; /* Align button to the right */
+    border-top: 1px solid #eee; /* Separator above button */
+    margin-top: 5px; /* Space above separator */
+}
+
+.ai-apply-button {
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 15px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
+}
+
+.ai-apply-button:hover {
+    background-color: #1565c0;
+}
