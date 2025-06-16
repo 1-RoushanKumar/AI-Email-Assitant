@@ -110,25 +110,21 @@ public class EmailGeneratorService {
         StringBuilder prompt = new StringBuilder();
         prompt.append("Generate an email reply based on the following content. Do not include a subject line in the response.");
 
-        // Conditionally append tone if provided by the user
         if (emailRequest.getTone() != null && !emailRequest.getTone().isEmpty()) {
             prompt.append(" Use a ").append(emailRequest.getTone()).append(" tone.");
         }
-        // Conditionally append desired length if provided
         if (emailRequest.getDesiredLength() != null && !emailRequest.getDesiredLength().isEmpty()) {
             prompt.append(" Make it ").append(emailRequest.getDesiredLength()).append(".");
         }
-        // Conditionally append keywords if provided
         if (emailRequest.getKeywords() != null && !emailRequest.getKeywords().isEmpty()) {
             prompt.append(" Include the following keywords: ").append(emailRequest.getKeywords()).append(".");
         }
-        // Conditionally append language if provided and not English (as English is default assumption)
         if (emailRequest.getLanguage() != null && !emailRequest.getLanguage().isEmpty() && !emailRequest.getLanguage().equalsIgnoreCase("English")) {
             prompt.append(" Write the reply in ").append(emailRequest.getLanguage()).append(".");
         }
 
-        prompt.append("\nOriginal Email: \n"); // Newline for clarity
-        prompt.append(emailRequest.getEmailContent()); // Append the user's email content
+        prompt.append("\nOriginal Email: \n");
+        prompt.append(emailRequest.getEmailContent());
         return prompt.toString();
     }
 }
